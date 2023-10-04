@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.1.4"
     id("io.spring.dependency-management") version "1.1.3"
     id("com.diffplug.spotless") version "6.22.0"
+    id("net.ltgt.errorprone") version "3.1.0"
 }
 
 group = "com.example"
@@ -19,6 +20,8 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    errorprone("com.google.errorprone:error_prone_core:2.22.0")
 }
 
 tasks.withType<Test> {

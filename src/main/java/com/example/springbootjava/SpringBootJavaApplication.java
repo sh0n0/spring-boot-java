@@ -8,5 +8,9 @@ public class SpringBootJavaApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(SpringBootJavaApplication.class, args);
+
+    // error-prone 動作確認用
+    // String[] nameArray = new String[] {"a", "b"};
+    // System.out.println(nameArray);
   }
 }
