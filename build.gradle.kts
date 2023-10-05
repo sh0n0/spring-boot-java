@@ -27,17 +27,13 @@ dependencies {
 
     errorprone("com.google.errorprone:error_prone_core:2.22.0")
     annotationProcessor("com.uber.nullaway:nullaway:0.10.14")
+    testAnnotationProcessor("com.uber.nullaway:nullaway:0.10.14")
 }
 
 tasks.withType<JavaCompile> {
-    // ifを削除すると、compileTestJavaで
-    // com.google.errorprone.InvalidCommandLineOptionException: NullAway is not a valid checker name
-    // が発生する
-    if (!name.lowercase(Locale.getDefault()).contains("test")) {
-        options.errorprone {
-            check("NullAway", CheckSeverity.ERROR)
-            option("NullAway:AnnotatedPackages", "com.example")
-        }
+    options.errorprone {
+        check("NullAway", CheckSeverity.ERROR)
+        option("NullAway:AnnotatedPackages", "com.example")
     }
 }
 
