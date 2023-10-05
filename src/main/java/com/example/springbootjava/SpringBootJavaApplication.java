@@ -13,4 +13,17 @@ public class SpringBootJavaApplication {
     // String[] nameArray = new String[] {"a", "b"};
     // System.out.println(nameArray);
   }
+
+  // NullAway 動作確認用
+  //  static void log(Object x) {
+  //    System.out.println(x.toString());
+  //  }
+  //
+  //  static void foo() {
+  //    log(bar());
+  //  }
+  //
+  //  static String bar() {
+  //    return null;
+  //  }
 }

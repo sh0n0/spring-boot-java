@@ -1,3 +1,7 @@
+import net.ltgt.gradle.errorprone.CheckSeverity
+import net.ltgt.gradle.errorprone.errorprone
+import java.util.*
+
 plugins {
     java
     id("org.springframework.boot") version "3.1.4"
@@ -22,6 +26,19 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     errorprone("com.google.errorprone:error_prone_core:2.22.0")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.14")
+}
+
+tasks.withType<JavaCompile> {
+    // ifを削除すると、compileTestJavaで
+    // com.google.errorprone.InvalidCommandLineOptionException: NullAway is not a valid checker name
+    // が発生する
+    if (!name.lowercase(Locale.getDefault()).contains("test")) {
+        options.errorprone {
+            check("NullAway", CheckSeverity.ERROR)
+            option("NullAway:AnnotatedPackages", "com.example")
+        }
+    }
 }
 
 tasks.withType<Test> {
