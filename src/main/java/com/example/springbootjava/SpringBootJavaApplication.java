@@ -9,9 +9,24 @@ public class SpringBootJavaApplication {
   public static void main(String[] args) {
     SpringApplication.run(SpringBootJavaApplication.class, args);
 
+    Expression expr = getExpr();
+
+    // Java 21
+    var dummy =
+        switch (expr) {
+          case IntExpr intExpr -> "int";
+          case StringExpr stringExpr -> "string";
+        };
+
+    System.out.println(dummy);
+
     // error-prone 動作確認用
     // String[] nameArray = new String[] {"a", "b"};
     // System.out.println(nameArray);
+  }
+
+  private static Expression getExpr() {
+    return new IntExpr(1);
   }
 
   // NullAway 動作確認用
